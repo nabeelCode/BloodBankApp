@@ -32,12 +32,13 @@ export const userCardView=(props)=>{
             </View>
         </View>
       );
-    return(
+        //placeholder views based on the search data
+      const Card = () => (
         <View style={style.main}>
             <FlatList
                     data={props.cardData}
                     renderItem={renderItem}
-                    keyExtractor={item=>item.id}
+                    keyExtractor={item=>item.id.toString()}
             />
             <Modal
                 visible={optionsMenu}
@@ -52,5 +53,14 @@ export const userCardView=(props)=>{
                 </Pressable>
             </Modal>
         </View>
+    ) 
+    const NoCard = () => (
+        <View style={style.emptyView}>
+           <Text style={style.emptyText}>No Such Data Found</Text>
+           <Text>Please Enter Correct Data</Text>
+        </View>
+    )
+    return(
+        props.cardData.length == 0 ? NoCard():Card()
     )
 }

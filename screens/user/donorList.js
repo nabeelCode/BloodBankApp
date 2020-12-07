@@ -1,79 +1,21 @@
 import React from 'react'
-import {View,Text} from 'react-native'
+import {View} from 'react-native'
 import mainStyle from '../../styles/style.js'
 import {userCardView as CardView} from '../../components/userCardView.js'
-import main from './main.js'
+//redux
+import { useSelector } from 'react-redux'
 
-const cardData=[
-    {
-        id:'1',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'2',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'3',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'4',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'5',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'6',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'7',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'8',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    },
-    {
-        id:'9',
-        name:'nabeel',
-        place:'areekode',
-        panchayath:'areekode',
-        lastDonated:'14-09-2009'
-    }
-]
-export default donorList=()=>{
+export default donorList=({route})=>{
+    const { place, panchayath, bloodGroup } = route.params
+    const donorSelector = useSelector( state => state.donors )
+    const condition = donor => donor.place === place & donor.panchayath === panchayath & donor.bloodGroup === bloodGroup
+    const donors = donorSelector.filter( 
+        donor => place != '' ? condition(donor) : donor.panchayath === panchayath & donor.bloodGroup === bloodGroup 
+    )
     return(
         <View style={mainStyle.main}>
             <View style={mainStyle.mainContent}>
-                <CardView cardData={cardData}/>
+                <CardView cardData={donors}/>
             </View>
             <View style={mainStyle.line}></View>
         </View>

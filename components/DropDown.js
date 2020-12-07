@@ -9,11 +9,10 @@
         headerTextColor : header text color of drop down
 */
 import React,{useState} from 'react'
-import {View,Image,Text,StyleSheet,Modal,ScrollView} from 'react-native'
+import {View,Text,Modal,ScrollView} from 'react-native'
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable'
 import {dropDownStyle as style} from '../styles/style.js'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
 
 export const DropDown=(props)=>{
     /*Drop Down Props:
@@ -24,29 +23,32 @@ export const DropDown=(props)=>{
     const selectorTextColor=props.selectorTextColor ? props.selectorTextColor:'black'
     const dropDownBackground=props.dropDownBackground ? props.dropDownBackground:'white'
     const headerText = props.headerText ? props.headerText:'Choose Item'
+
+    const [modalstatus,setModal]=useState(false)
+    const [defaultDropListValue,setDefaultDropListValue]=useState(defaultValue)
+    
+
     const pressableItem = props.items.map(
-        (a,index)=>{
+        (a)=>{
             return(
-                <View  key={index}>
-                    <Pressable onPress={
+                    <Pressable key={a.id.toString()} onPress={
                         ()=>{
-                            setDefaultDropListValue(a)
+                            props.onItemChange(a.name)
+                            setDefaultDropListValue(a.name)
                             setModal(false)
-                        }
+                            console.log(1)
+                        }       
                     }>
-                        <Text key={index} style={[
+                        <Text style={[
                         style.dropDownText,
                         {   
                             color:itemTextColor
-                        }]}>{a}</Text>
+                        }]}>{a.name}</Text> 
                     </Pressable>
-                </View>
             )
         }
     )
 
-    const [modalstatus,setModal]=useState(false)
-    const [defaultDropListValue,setDefaultDropListValue]=useState(defaultValue)
     return(
         <View style={style.main}>
             <Pressable style={style.bloodgroup} onPress={()=>{
@@ -56,8 +58,8 @@ export const DropDown=(props)=>{
                         <Text style={[
                             style.dropDownSelectorText,
                             {
-                                color:selectorTextColor
-                            }
+                                color:selectorTextColor ? selectorTextColor:'black'
+                            }   
                         ]}>{defaultDropListValue}</Text>
                     </View>
                     <View style={style.bloodGroupImage}>

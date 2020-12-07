@@ -13,98 +13,106 @@ import mainadmin from './screens/admin/mainadmin.js'
 import editDonor from './screens/admin/editDonor.js'
 import listEditDonor from './screens/admin/listEditDonor.js'
 import addPanchayath from './screens/admin/addPanchayath.js'
-import editDonorData from './screens/admin/editDonorData.js'
+import editDonorData from './screens/admin/editDonorData'
 //header button component
 import HeaderComponent from './components/HeaderComponent.js'
+
+//redux 
+import { Provider } from 'react-redux'
+import Store from './redux/Store' 
 
 const Stack = createStackNavigator()
 
 const app=()=> {
     return (
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-            headerStyle: {
-              backgroundColor: '#B81524'
-            },
-            headerTintColor: '#fff', 
-        }}>
-          <Stack.Screen
-            name="Main"
-            component={main}
-            options={(({navigation})=>({
-              title: 'Blood Bank App' ,
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='admin'
-                  />
-                )
-              }) 
-            )} 
-          />
-          <Stack.Screen name='Admin Login' component={adminlogin}/>
-          <Stack.Screen name='Admin Main' component={mainadmin} 
-            options={(({navigation})=>({
-              title:'Admin Page',
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='logout'
-                  />
-                )
-              }) 
-            )}
-          />
-          <Stack.Screen name='Edit Donor' component={editDonor}
-            options={(({navigation})=>({
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='logout'
-                  />
-                )
-              }) 
-            )} 
-          />
-          <Stack.Screen name='List Edit Donor' component={listEditDonor}
-            options={(({navigation})=>({
-              title:'Search Donor',
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='logout'
-                  />
-                )
-              }) 
-            )}
-          />
-          <Stack.Screen name='Add Panchayath' component={addPanchayath}
-            options={(({navigation})=>({
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='logout'
-                  />
-                )
-              }) 
-            )}
-          />
-          <Stack.Screen name='Search Donor' component={searchDonor}/>
-          <Stack.Screen name='Donor List' component={donorList}/>
-          <Stack.Screen name='Add Donor' component={addDonor}/>
-          <Stack.Screen name='Edit Donor Data' component={editDonorData}
-            options={(({navigation})=>({
-              headerRight:()=>(
-                  <HeaderComponent 
-                    onPress={()=>{navigation.navigate('Admin Login')}}
-                    title='logout'
-                  />
-                )
-              }) 
-            )}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={Store}>
+          <NavigationContainer>
+          <Stack.Navigator 
+            initialRouteName="Main"
+          screenOptions={{
+              headerStyle: {
+                backgroundColor: '#B81524'
+              },
+              headerTintColor: '#fff', 
+          }}>
+            <Stack.Screen
+              name="Main"
+              component={main}
+              options={(({navigation})=>({
+                title: 'Blood Bank App' ,
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='admin'
+                    />
+                  )
+                }) 
+              )} 
+            />
+            <Stack.Screen name='Admin Login' component={adminlogin}/>
+            <Stack.Screen name='Admin Main' component={mainadmin} 
+              options={(({navigation})=>({
+                title:'Admin Page',
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='logout'
+                    />
+                  )
+                }) 
+              )}
+            />
+            <Stack.Screen name='Edit Donor' component={editDonor}
+              options={(({navigation})=>({
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='logout'
+                    />
+                  )
+                }) 
+              )} 
+            />
+            <Stack.Screen name='List Edit Donor' component={listEditDonor}
+              options={(({navigation})=>({
+                title:'Search Donor',
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='logout'
+                    />
+                  )
+                }) 
+              )}
+            />
+            <Stack.Screen name='Add Panchayath' component={addPanchayath}
+              options={(({navigation})=>({
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='logout'
+                    />
+                  )
+                }) 
+              )}
+            />
+            <Stack.Screen name='Search Donor' component={searchDonor}/>
+            <Stack.Screen name='Donor List' component={donorList}/>
+            <Stack.Screen name='Add Donor' component={addDonor}/>
+            <Stack.Screen name='Edit Donor Data' component={editDonorData}
+              options={(({navigation})=>({
+                headerRight:()=>(
+                    <HeaderComponent 
+                      onPress={()=>{navigation.navigate('Admin Login')}}
+                      title='logout'
+                    />
+                  )
+                }) 
+              )}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     )
   }
 export default app

@@ -132,7 +132,7 @@ export const cardStyle=StyleSheet.create(
         menuModal:{
             justifyContent:'flex-end',
             flex:1,
-            backgroundColor:'rgba(0, 104, 111, 0.1)'
+            backgroundColor:'rgba(184, 21, 36, 0.05)'
         },menu:{
             backgroundColor:'white',
             marginRight:'2.5%',
@@ -149,6 +149,18 @@ export const cardStyle=StyleSheet.create(
             height:'1%',
             borderRadius:10,
             top:'1%'
+        },
+        //no card data view
+        emptyView:{
+            flex:1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        emptyText:{
+            fontSize: hp('3%'),
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+            color: '#B81524'
         }
     }
 )
@@ -163,7 +175,7 @@ export const panchayathStyle=StyleSheet.create(
             flex:1
         },
         content:{
-          flex:6
+          flex:1,
         },
         addButtonView:{
             paddingTop:'2%',
@@ -182,7 +194,7 @@ export const panchayathStyle=StyleSheet.create(
             borderColor:'white'
         },
         itemStyle:{
-            backgroundColor:'white',
+            flex:1
         },
         itemTextView:{
             paddingTop:'2%',
@@ -190,7 +202,7 @@ export const panchayathStyle=StyleSheet.create(
             paddingRight:'2%',
             paddingLeft:'2%',
             marginLeft:'2%',
-            flexDirection:'row'
+            flexDirection:'row',
         },
         line:{
             height:'2%',
@@ -199,13 +211,67 @@ export const panchayathStyle=StyleSheet.create(
         text:{
             flex:2
         },
-        image:{
+        iconView:{
             flex:1,
-            alignItems:'flex-end',
+            justifyContent:'flex-end',
             margin:'1%',
-            margin:'1%',
-            margin:'1%',
-            margin:'1%'
+            flexDirection:'row',
+        },
+        iconStyle:{
+            marginLeft: wp('3%')
+        },  
+        modalView:{
+            flex:1,
+           
+        },
+        modal:{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex:1,
+        },
+        modalContent:{
+            backgroundColor:'white',
+            paddingTop: hp('3%'),
+            paddingBottom: hp('5%'),
+            paddingLeft: wp('5%'),
+            paddingRight: wp('5%'),
+            elevation: 5,
+            justifyContent: 'center',
+            
+        },
+        button:{
+            paddingLeft: wp('4%'),
+            paddingRight: wp('4%'),
+            paddingTop: hp('.8%'),
+            paddingBottom: hp('.8%'),
+            borderRadius: 20,
+            backgroundColor:'#B81524',
+            alignSelf:'center',
+            marginTop: hp('2%')
+        },
+        panchayathText:{
+            color: '#B81524',
+            fontSize: hp('2.5%'),
+            fontWeight: 'bold',
+            alignSelf: 'flex-start',
+            marginBottom: hp('1%'),
+            marginTop: hp('1%')
+        },
+        modalInnerView:{
+            alignItems: 'center'
+        },
+        modalPanchayath:{
+            width:wp('70%')
+        },
+        buttonText:{
+            color:'white'
+        },
+        underLine:{
+            backgroundColor:'#B81524',
+            height:hp('.2%')
+        },
+        flatListStyle:{
+            flex:1
         }
     }
 )

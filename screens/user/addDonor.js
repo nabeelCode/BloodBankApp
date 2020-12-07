@@ -4,16 +4,19 @@ import mainStyle,{donorStyle} from '../../styles/style.js'
 import {DropDown} from '../../components/DropDown.js'
 import Button from '../../components/Button.js'
 import {CustomTextInput as TextInput} from '../../components/CustomTextInput.js'
+//redux
+import { useSelector, useDispatch } from 'react-redux'
+import { addDonorData } from '../../redux/DonorSlice'
 
-bloodGroupList=[
-    'A +ve',
-    'AB +ve',
-    'B +ve',
-    'O +ve',
-    'A -ve',
-    'AB -ve',
-    'B -ve',
-    'O -ve'
+bloodGroups=[
+    { id: 1, name: 'A +ve'},
+    { id: 2, name: 'AB +ve' },
+    { id: 3, name: 'B +ve' },
+    { id: 4, name: 'O +ve' },
+    { id: 5, name: 'A -ve' },
+    { id: 6, name: 'AB -ve' },
+    { id: 7, name: 'B -ve' },
+    { id: 8, name: 'o -ve'}
 ]
 panchayathList=[
     'Areekode',
@@ -26,7 +29,8 @@ panchayathList=[
     'Edavanna'
 ]
 addDonor=({navigation})=>{
-    const [bloodGroup,setBloodGroup]=useState('')
+    const [bloodGroup,setBloodGroup]=useState('choose blood group')
+    const [panchayath,setPanchayath]=useState('choose panchayath')
     const [nameText,onChangeName]=useState('')
     const [placeText,onChangePlace]=useState('')
     const [phoneText,onChangePhone]=useState('')
@@ -34,6 +38,10 @@ addDonor=({navigation})=>{
     const [isValidatePlace,validatePlace]=useState(true)
     const [isValidatePhone,validatePhone]=useState(true)
     const [isLogin,login]=useState(false)
+    //panchayath selector
+    const panchayathList = useSelector( state => state.panchayath )
+    //dispatch
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         //login button trigger
@@ -41,11 +49,15 @@ addDonor=({navigation})=>{
     },[nameText,placeText,phoneText])
     
     //validation function on button press
-    validation=()=>{
+    const validation=()=>{
         nameText.length<3 ? validateName(false):validateName(true)
         placeText.length<3 ? validatePlace(false):validatePlace(true)
         phoneText.length<10 ? validatePhone(false):validatePhone(true)
-        isLogin ? null:null
+        isLogin ? 
+            dispatch( addDonorData( nameText, bloodGroup, panchayath, placeText, phoneText ) ) &&
+            navigation.navigate( 'Main' )
+        :null        
+
     }
 
 
@@ -56,7 +68,7 @@ addDonor=({navigation})=>{
                     <View style={donorStyle.paddingBottom}>
                         <TextInput 
                             placeholder='Name' 
-                            style={{backgroundColor:'white'}}
+                            style={{backgroundColor:'white'}} 
                             onChangeText={(item)=>{onChangeName(item)}}
                         />
                         <View style={[donorStyle.errorTextView,]}>
@@ -65,23 +77,23 @@ addDonor=({navigation})=>{
                             }]}>Please Enter a Valid Name</Text>
                         </View>
                     </View>
-                    <View style={donorStyle.paddingBottom}>
+                    <View style={donorStyle.paddingBottom}> 
                         <DropDown 
-                            items={bloodGroupList}
-                            defaultValue='Choose group'
+                            items={ bloodGroups }
+                            defaultValue={ bloodGroup }
                             headerText='Choose group'
                             headerTextColor='#B81524'
-                            selectorTextColor='#BBBBBB'
+                            onItemChange = { item => setBloodGroup(item) } 
                         />
                     </View>
                     <View>
                         <DropDown 
-                            items={panchayathList}
-                            defaultValue='Choose panchayath'
+                            items={ panchayathList }
+                            defaultValue={ panchayath }
                             headerText='Choose panchyath'
                             headerTextColor='#00686F'
                             headerTextColor='#B81524'
-                            selectorTextColor='#BBBBBB'
+                            onItemChange = { item => setPanchayath(item) }
                         />
                         </View> 
                 </View>

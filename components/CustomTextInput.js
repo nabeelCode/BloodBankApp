@@ -40,7 +40,7 @@ export const CustomTextInput=(props)=>{
                 <TextInput 
                     style={textInputStyle.text}
                     onChangeText={props.onChangeText}
-                    defaultValue={props.text}
+                    defaultValue={props.defaultValue}
                     placeholder={props.placeholder}
                 />
             </View>

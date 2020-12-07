@@ -31,6 +31,7 @@ export default adminlogin=({navigation})=>{
                         placeholder='Username' 
                         style={donorStyle.editext}
                         onChangeText={(item)=>{onChangeUsername(item)}}
+                        
                     />
                 </View>
                 <View style={[donorStyle.errorTextView,]}>
@@ -43,6 +44,7 @@ export default adminlogin=({navigation})=>{
                         placeholder='Password' 
                         style={donorStyle.editext}
                         onChangeText={(item)=>{onChangePassword(item)}}
+                        secureTextEntry={true}
                     />
                 </View>
                 <View style={[donorStyle.errorTextView,]}>
